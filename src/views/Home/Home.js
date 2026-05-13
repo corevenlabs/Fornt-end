@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
 import './Home.css';
-
-// Importación de tus componentes
 import Hero from '../../components/Hero/Hero';
 import Services from '../../components/Services/Services';
 import DesignShowcase from '../../components/DesignShowcase/DesignShowcase';
 import TechStack from '../../components/TechStack/TechStack';
 import ContactForm from '../../components/ContactForm/ContactForm';
+import TrustedBrands from '../../components/TrustedBrands/TrustedBrands';
 
 
 export default function Home() {
@@ -68,6 +67,10 @@ export default function Home() {
 
         <section id="stack" className="reveal-section">
           <TechStack />
+        </section>
+
+        <section id="stack" className="reveal-section">
+          <TrustedBrands/>
         </section>
 
         <section id="contacto" className="reveal-section">

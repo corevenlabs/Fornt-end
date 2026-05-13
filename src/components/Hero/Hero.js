@@ -81,8 +81,7 @@ export default function Hero() {
           </p>
 
           <div className="hero-actions fade" key={index + '-btn'}>
-            <button className="primary">Trabajemos juntos</button>
-            <button className="secondary">Ver servicios</button>
+            
           </div>
 
         </div>

@@ -39,7 +39,7 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <div className="bottom-left">
-            <p>© CH — Professional Developer.</p>
+            <p>© COREVEN — Professional Developer.</p>
           </div>
           <div className="bottom-right">
             <p>SANTIAGO, CL [ 33.4489° S, 70.6693° W ]</p>
