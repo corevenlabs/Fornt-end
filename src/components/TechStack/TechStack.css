@@ -1,0 +1,110 @@
+.tech {
+    padding: 100px 0; /* Sin padding lateral para que el marquee toque los bordes */
+    background-color: #020617;
+    overflow: hidden;
+  }
+  
+  .tech-header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 0 5%;
+  }
+  
+  .tech-title {
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 15px;
+  }
+  
+  .tech-title span {
+    background: linear-gradient(90deg, #60A5FA, #A855F7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .tech-subtitle {
+    color: #64748b;
+    font-size: 16px;
+  }
+  
+  /* MARQUEE CORE */
+  .marquee {
+    position: relative;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    padding: 20px 0;
+  }
+  
+  .marquee-content {
+    display: flex;
+    gap: 30px;
+    animation: scroll 30s linear infinite;
+    min-width: 100%;
+  }
+  
+  /* Animación de desplazamiento infinito */
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  
+  /* Pausar al pasar el mouse para interactividad */
+  .marquee:hover .marquee-content {
+    animation-play-state: paused;
+  }
+  
+  .tech-card {
+    flex-shrink: 0;
+    padding: 20px 40px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .tech-card:hover {
+    background: rgba(59, 130, 246, 0.05);
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-5px);
+  }
+  
+  .tech-name {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  
+  .tech-level {
+    font-family: monospace;
+    font-size: 10px;
+    color: #3b82f6;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  /* DEGRADADOS LATERALES (Efecto "Holograma") */
+  .marquee-fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  .marquee-fade.left {
+    left: 0;
+    background: linear-gradient(to right, #020617, transparent);
+  }
+  
+  .marquee-fade.right {
+    right: 0;
+    background: linear-gradient(to left, #020617, transparent);
+  }

@@ -1,0 +1,11 @@
+/* index.css o App.css */
+
+html {
+    scroll-behavior: smooth !important;
+  }
+  
+  [id] {
+    scroll-margin-top: 100px;
+  }
+  
+  /* ... el resto de tus estilos ... */
