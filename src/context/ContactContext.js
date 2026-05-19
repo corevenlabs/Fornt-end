@@ -8,7 +8,7 @@ export const ContactProvider = ({ children }) => {
 
         try {
     
-            const response = await fetch("http://localhost:3000/email", {
+            const response = await fetch("https://backend-coreven.onrender.com/email", {
                 method: 'POST',
                 body: JSON.stringify(formData),
                 headers: {
