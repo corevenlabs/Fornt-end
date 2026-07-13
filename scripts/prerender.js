@@ -2,10 +2,34 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { pathToFileURL } = require('url');
-const puppeteer = require('puppeteer');
 
 const BUILD_DIR = path.join(__dirname, '..', 'build');
 const PORT = 5001;
+
+// Vercel's build container (and most serverless/CI Linux images) lacks the
+// system libraries (libnspr4, libnss3, ...) that puppeteer's bundled full
+// Chrome needs. @sparticuz/chromium ships a Chromium build packaged for
+// exactly these minimal environments. It doesn't support local Windows/Mac
+// dev, so we only use it when running on Vercel; puppeteer's full Chrome
+// still runs the same script locally.
+async function launchBrowser() {
+  if (process.env.VERCEL) {
+    const puppeteerCore = require('puppeteer-core');
+    // @sparticuz/chromium ships as an ESM default export; under CommonJS
+    // require() the real API lands on .default, not the module root.
+    const chromium = require('@sparticuz/chromium').default;
+    return puppeteerCore.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath(),
+      headless: true
+    });
+  }
+
+  const puppeteer = require('puppeteer');
+  return puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+}
 
 const MIME_TYPES = {
   '.html': 'text/html',
@@ -63,12 +87,11 @@ async function prerender() {
   const server = http.createServer(serve(indexTemplate));
   await new Promise((resolve) => server.listen(PORT, resolve));
 
-  const browser = await puppeteer.launch({
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
-  });
-  const page = await browser.newPage();
-
+  let browser;
   try {
+    browser = await launchBrowser();
+    const page = await browser.newPage();
+
     for (const { route, outFile } of routes) {
       await page.goto(`http://localhost:${PORT}${route}`, { waitUntil: 'networkidle0' });
       await page.waitForSelector('[data-app-ready="true"]', { timeout: 10000 });
@@ -80,12 +103,19 @@ async function prerender() {
       console.log(`Prerendered ${route} -> build/${outFile}`);
     }
   } finally {
-    await browser.close();
+    if (browser) await browser.close();
     server.close();
   }
 }
 
 prerender().catch((err) => {
-  console.error('Prerender failed:', err);
-  process.exit(1);
+  // Prerendering is an SEO enhancement, not a hard requirement — the app
+  // still works correctly client-side rendered without it. Fail loudly but
+  // don't block the deploy, so an environment-specific issue here (browser
+  // launch, missing libs, etc.) can never take down an otherwise-working build.
+  console.error('\n========================================');
+  console.error('WARNING: Prerendering failed, shipping without it.');
+  console.error('SEO tags will only be set client-side (see src/components/Seo/Seo.js).');
+  console.error(err);
+  console.error('========================================\n');
 });
