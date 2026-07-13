@@ -1,23 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { SERVICES } from '../../data/services';
 import './Services.css';
-
-const services = [
-  {
-    title: 'Desarrollo Web',
-    tag: 'Next.js / React',
-    description: 'Interfaces de alto rendimiento que fusionan estética con una arquitectura técnica impecable.'
-  },
-  {
-    title: 'Integración',
-    tag: 'APIs / Cloud',
-    description: 'Ecosistemas conectados donde cada dato fluye con precisión quirúrgica entre tus plataformas.'
-  },
-  {
-    title: 'Automatización',
-    tag: 'AI / Workflow',
-    description: 'Sistemas inteligentes que eliminan la fricción operativa, permitiéndote escalar sin límites.'
-  }
-];
 
 export default function Services() {
   return (
@@ -35,17 +19,16 @@ export default function Services() {
         </div>
 
         <div className="services-grid">
-          {services.map((s, i) => (
-            <div key={i} className="service-panel">
+          {SERVICES.map((s, i) => (
+            <Link key={s.slug} to={`/servicios/${s.slug}`} className="service-panel">
               <div className="panel-content">
                 <div className="panel-top">
                   <span className="panel-number">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="panel-tag">{s.tag}</span>
                 </div>
-                
+
                 <h3 className="panel-title">{s.title}</h3>
-                <p className="panel-description">{s.description}</p>
-                
+                <p className="panel-description">{s.shortDescription}</p>
+
                 <div className="panel-footer">
                   <span className="view-more">Explorar sistema</span>
                   <div className="arrow-icon">→</div>
@@ -53,7 +36,7 @@ export default function Services() {
               </div>
               {/* Capa de luz decorativa interna */}
               <div className="panel-glow"></div>
-            </div>
+            </Link>
           ))}
         </div>
 

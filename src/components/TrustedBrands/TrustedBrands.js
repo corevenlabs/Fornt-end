@@ -2,12 +2,11 @@ import React from "react";
 import "./TrustedBrands.css";
 
 const brands = [
-  "/image/lenox.jpg",
-  "/image/insigth.jpg",
-  "/image/apex.png",
-  "/image/vertex.png",
-  "/image/camping.jpg",
-  
+  { src: "/image/lenox.jpg", name: "Lenox" },
+  { src: "/image/insigth.jpg", name: "Insight" },
+  { src: "/image/apex.png", name: "Apex" },
+  { src: "/image/vertex.png", name: "Vertex" },
+  { src: "/image/camping.jpg", name: "Camping" },
 ];
 
 export default function TrustedBrands() {
@@ -33,9 +32,9 @@ export default function TrustedBrands() {
 
         <div className="trusted-slider">
           <div className="trusted-track">
-            {[...brands, ...brands].map((logo, i) => (
+            {[...brands, ...brands].map((brand, i) => (
               <div className="trusted-logo" key={i}>
-                <img src={logo} alt="brand" />
+                <img src={brand.src} alt={`Logo de ${brand.name}`} />
               </div>
             ))}
           </div>

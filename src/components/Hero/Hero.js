@@ -1,38 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Hero.css';
 
 const slides = [
   {
     image: '/image/banner.data.jpg',
     badge: 'Desarrollo Web',
-    title: (
-      <>
-        Creamos páginas web <br />
-        que <span>convierten clientes</span>
-      </>
-    ),
     description: 'Diseñamos experiencias digitales pensadas para vender y escalar.'
   },
   {
     image: '/image/banner.jpg',
     badge: 'Integraciones API',
-    title: (
-      <>
-        Conectamos tu sistema <br />
-        con <span>cualquier plataforma</span>
-      </>
-    ),
     description: 'Automatizamos procesos y eliminamos tareas manuales.'
   },
   {
     image: '/image/bannerspago.jpg',
     badge: 'Pagos Online',
-    title: (
-      <>
-        Integramos pagos <br />
-        <span>rápidos y seguros</span>
-      </>
-    ),
     description: 'Implementamos pasarelas de pago listas para escalar tu negocio.'
   }
 ];
@@ -72,16 +55,17 @@ export default function Hero() {
             {current.badge}
           </span>
 
-          <h1 key={index} className="fade">
-            {current.title}
+          <h1>
+            Software a medida que <span>escala tu negocio</span>
           </h1>
 
           <p key={index + '-p'} className="fade">
             {current.description}
           </p>
 
-          <div className="hero-actions fade" key={index + '-btn'}>
-            
+          <div className="hero-actions">
+            <Link to="/comenzar" className="btn-primary">Comenzar Proyecto</Link>
+            <a href="#servicios" className="btn-secondary">Ver Servicios</a>
           </div>
 
         </div>

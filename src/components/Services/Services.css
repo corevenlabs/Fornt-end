@@ -74,8 +74,8 @@
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
 }
 
 /* ===== PANEL FUTURISTA ===== */
@@ -90,6 +90,8 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  color: inherit;
 }
 
 /* Borde de luz en el hover */
@@ -112,16 +114,6 @@
   font-size: 14px;
   color: #3B82F6;
   font-weight: 700;
-}
-
-.panel-tag {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 4px 10px;
-  border-radius: 2px;
-  color: #64748B;
 }
 
 .panel-title {

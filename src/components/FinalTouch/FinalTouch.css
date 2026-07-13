@@ -41,55 +41,6 @@
     line-height: 1.6;
   }
   
-  /* FORMULARIO ULTRA-MINIMALISTA */
-  .cta-form {
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  
-  .input-group {
-    display: flex;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 8px;
-    border-radius: 4px;
-    transition: 0.4s;
-  }
-  
-  .input-group:focus-within {
-    border-color: #3b82f6;
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
-  }
-  
-  .input-group input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    padding: 15px 20px;
-    color: #fff;
-    font-size: 16px;
-    outline: none;
-  }
-  
-  .input-group button {
-    background: #fff;
-    color: #000;
-    border: none;
-    padding: 0 25px;
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: 0.3s;
-    border-radius: 2px;
-  }
-  
-  .input-group button:hover {
-    background: #3b82f6;
-    color: #fff;
-  }
-  
   .form-note {
     margin-top: 20px;
     font-size: 12px;

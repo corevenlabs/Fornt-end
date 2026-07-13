@@ -1,11 +1,21 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Footer.css';
 
+const NAV_LINKS = [
+  { hash: '#inicio', label: 'Inicio' },
+  { hash: '#servicios', label: 'Servicios' },
+  { hash: '#diseño', label: 'Diseño' }
+];
+
 export default function Footer() {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
   return (
     <footer className="minimal-footer">
       <div className="footer-container">
-        
+
         <div className="footer-main">
           {/* Columna 1: Brand/Status */}
           <div className="footer-col">
@@ -20,9 +30,14 @@ export default function Footer() {
           <div className="footer-col">
             <h4 className="footer-label">Navegación</h4>
             <nav className="footer-nav">
-              <a href="#hero">Inicio</a>
-              <a href="#services">Servicios</a>
-              <a href="#showcase">Showcase</a>
+              {NAV_LINKS.map(({ hash, label }) => (
+                isHome ? (
+                  <a key={hash} href={hash}>{label}</a>
+                ) : (
+                  <Link key={hash} to={`/${hash}`}>{label}</Link>
+                )
+              ))}
+              <Link to="/comenzar">Comenzar Proyecto</Link>
             </nav>
           </div>
 
@@ -30,9 +45,7 @@ export default function Footer() {
           <div className="footer-col">
             <h4 className="footer-label">Social</h4>
             <nav className="footer-nav">
-              <a href="#linkedin" target="_blank">LinkedIn</a>
-              <a href="#github" target="_blank">GitHub</a>
-              <a href="#instagram" target="_blank">Instagram</a>
+              <a href="https://instagram.com/corevenlabs" target="_blank" rel="noopener noreferrer">Instagram</a>
             </nav>
           </div>
         </div>

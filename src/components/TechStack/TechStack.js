@@ -1,23 +1,27 @@
-import React from 'react';
-import './TechStack.css';
+import React from "react";
+import "./TechStack.css";
 
 const technologies = [
-  { name: 'React', level: 'Expert' },
-  { name: 'Next.js', level: 'Advanced' },
-  { name: 'TypeScript', level: 'Expert' },
-  { name: 'Node.js', level: 'Advanced' },
-  { name: 'Css', level: 'Expert' },
-  { name: 'JavaScript', level: 'Expert' },
-  { name: 'Tailwind', level: 'Advanced' },
-  { name: 'Cloud', level: 'Architect' }
+  { name: "React", level: "Expert" },
+  { name: "Next.js", level: "Advanced" },
+  { name: "TypeScript", level: "Expert" },
+  { name: "Node.js", level: "Advanced" },
+  { name: "Css", level: "Expert" },
+  { name: "JavaScript", level: "Expert" },
+  { name: "Tailwind", level: "Advanced" },
+  { name: "Cloud", level: "Architect" },
 ];
 
 export default function TechStack() {
   return (
     <section className="tech">
       <div className="tech-header">
-        <h2 className="tech-title">Stack <span>Tecnológica</span></h2>
-        <p className="tech-subtitle">Herramientas de alto rendimiento para soluciones escalables.</p>
+        <h2 className="tech-title">
+          Stack <span>Tecnológico</span>
+        </h2>
+        <p className="tech-subtitle">
+          Herramientas de alto rendimiento para soluciones escalables.
+        </p>
       </div>
 
       <div className="marquee">
@@ -30,7 +34,7 @@ export default function TechStack() {
             </div>
           ))}
         </div>
-        
+
         {/* Capas de degradado para el efecto de "aparición" desde la oscuridad */}
         <div className="marquee-fade left"></div>
         <div className="marquee-fade right"></div>

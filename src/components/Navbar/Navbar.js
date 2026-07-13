@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
+
+const SECTION_LINKS = [
+  { hash: '#inicio', label: 'Inicio' },
+  { hash: '#servicios', label: 'Servicios' },
+  { hash: '#diseño', label: 'Diseño' },
+  { hash: '#stack', label: 'Stack' },
+  { hash: '#contacto', label: 'Contacto' }
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,25 +29,33 @@ export default function Navbar() {
     setMenuOpen(false);
   };
 
+  const renderSectionLink = (hash, label, className, onClick) => (
+    isHome ? (
+      <a key={hash} href={hash} className={className} onClick={onClick}>{label}</a>
+    ) : (
+      <Link key={hash} to={`/${hash}`} className={className} onClick={onClick}>{label}</Link>
+    )
+  );
+
   return (
     <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
       <div className="navbar-container">
-     
+
         <div className="navbar-logo">
-          <a href="#inicio">COREVENLABS</a>
+          <Link to="/">
+            <img src="/image/coreven-logo.svg" alt="Corevenlabs" className="navbar-logo-icon" />
+            COREVENLABS
+          </Link>
         </div>
 
-    
+
         <div className="navbar-menu">
-          <a href="#inicio" className="nav-link">Inicio</a>
-          <a href="#servicios" className="nav-link">Servicios</a>
-          <a href="#diseño" className="nav-link">Diseño</a>
-          <a href="#stack" className="nav-link">Stack</a>
-          <a href="#contacto" className="nav-link">Contacto</a>
+          {SECTION_LINKS.map(({ hash, label }) => renderSectionLink(hash, label, 'nav-link'))}
+          <Link to="/comenzar" className="btn-primary btn-sm">Comenzar Proyecto</Link>
         </div>
 
-   
-        <button 
+
+        <button
           className={`mobile-menu-btn ${menuOpen ? 'active' : ''}`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Abrir menú"
@@ -47,13 +66,10 @@ export default function Navbar() {
         </button>
       </div>
 
-    
+
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <a href="#inicio" onClick={handleNavClick}>Inicio</a>
-        <a href="#servicios" onClick={handleNavClick}>Servicios</a>
-        <a href="#diseño" onClick={handleNavClick}>Diseño</a>
-        <a href="#stack" onClick={handleNavClick}>Stack</a>
-        <a href="#contacto" onClick={handleNavClick}>Contacto</a>
+        {SECTION_LINKS.map(({ hash, label }) => renderSectionLink(hash, label, undefined, handleNavClick))}
+        <Link to="/comenzar" className="btn-primary btn-sm" onClick={handleNavClick}>Comenzar Proyecto</Link>
       </div>
     </nav>
   );

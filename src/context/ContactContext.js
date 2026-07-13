@@ -6,28 +6,21 @@ export const ContactProvider = ({ children }) => {
 
     const sendEmail = async (formData) => {
 
-        try {
-    
-            const response = await fetch("https://backend-coreven.onrender.com/email", {
-                method: 'POST',
-                body: JSON.stringify(formData),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-    
-            if (!response.ok) {
-                const text = await response.text();
-                throw new Error(text);
+        const response = await fetch("https://backend-coreven.onrender.com/email", {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                'Content-Type': 'application/json'
             }
-    
-            const datos = await response.json();
-    
-            console.log("Correo enviado", datos);
-    
-        } catch (err) {
-            console.error("Error", err);
+        });
+
+        if (!response.ok) {
+            const text = await response.text();
+            throw new Error(text);
         }
+
+        const contentType = response.headers.get('content-type') || '';
+        return contentType.includes('application/json') ? response.json() : null;
     }
 
  

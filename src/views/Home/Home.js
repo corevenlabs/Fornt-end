@@ -1,16 +1,29 @@
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
 import './Home.css';
+import Seo from '../../components/Seo/Seo';
 import Hero from '../../components/Hero/Hero';
 import Services from '../../components/Services/Services';
 import DesignShowcase from '../../components/DesignShowcase/DesignShowcase';
 import TechStack from '../../components/TechStack/TechStack';
-import ContactForm from '../../components/ContactForm/ContactForm';
 import TrustedBrands from '../../components/TrustedBrands/TrustedBrands';
+import FinalTouch from '../../components/FinalTouch/FinalTouch';
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Corevenlabs',
+  url: 'https://www.corevenlabs.com/',
+  logo: 'https://www.corevenlabs.com/image/coreven.png',
+  description: 'Corevenlabs desarrolla sitios web, integraciones de APIs y automatizaciones a medida para escalar negocios.',
+  areaServed: 'CL',
+  sameAs: [
+    'https://instagram.com/corevenlabs'
+  ]
+};
 
 export default function Home() {
-  
+
   useEffect(() => {
     // 1. Inicializamos Lenis
     const lenis = new Lenis({
@@ -25,6 +38,14 @@ export default function Home() {
     }
 
     requestAnimationFrame(raf);
+
+    // Si llegamos desde otra ruta con un hash (ej. /comenzar -> /#servicios),
+    // hacemos scroll a la sección una vez que Lenis esté listo.
+    if (window.location.hash) {
+      requestAnimationFrame(() => {
+        lenis.scrollTo(window.location.hash, { offset: -80, immediate: true });
+      });
+    }
 
     // 2. Lógica para interceptar clics del Navbar
     const handleAnchorClick = (e) => {
@@ -54,6 +75,13 @@ export default function Home() {
 
   return (
     <div className="home-wrapper">
+      <Seo
+        title="Desarrollo Web, Integraciones y Automatización a Medida"
+        description="Corevenlabs desarrolla sitios web, integraciones de APIs y automatizaciones a medida para escalar tu negocio. Cuéntanos tu proyecto y comencemos hoy."
+        canonical="https://www.corevenlabs.com/"
+        ogImage="https://www.corevenlabs.com/image/coreven.png"
+        jsonLd={organizationJsonLd}
+      />
       <main className="home-content">
         <div id="inicio"><Hero /></div>
         
@@ -69,13 +97,11 @@ export default function Home() {
           <TechStack />
         </section>
 
-        <section id="stack" className="reveal-section">
+        <section id="marcas" className="reveal-section">
           <TrustedBrands/>
         </section>
 
-        <section id="contacto" className="reveal-section">
-          <ContactForm />
-        </section>
+        <div id="contacto"><FinalTouch /></div>
 
       </main>
     </div>
