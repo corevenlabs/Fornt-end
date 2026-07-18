@@ -6,7 +6,7 @@ const SECTION_LINKS = [
   { hash: '#inicio', label: 'Inicio' },
   { hash: '#servicios', label: 'Servicios' },
   { hash: '#diseño', label: 'Diseño' },
-  { hash: '#stack', label: 'Stack' },
+  { hash: '#equipo', label: 'Equipo' },
   { hash: '#contacto', label: 'Contacto' }
 ];
 

@@ -93,7 +93,7 @@ export default function Home() {
           <DesignShowcase />
         </section>
 
-        <section id="stack" className="reveal-section">
+        <section id="equipo" className="reveal-section">
           <TechStack />
         </section>
 
